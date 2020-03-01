@@ -6,6 +6,8 @@ using UnityEngine;
 public class EnemyDamage : MonoBehaviour
 {
     [SerializeField] int hitPoints = 10;
+    [SerializeField] ParticleSystem hitParticleSystem = null;
+    [SerializeField] ParticleSystem deathParticleSystem = null;
     
     void Start()
     {
@@ -24,10 +26,13 @@ public class EnemyDamage : MonoBehaviour
     private void ProcessHit()
     {
         hitPoints--;
+        hitParticleSystem.Play();
     }
 
     private void KillEnemy()
     {
+        ParticleSystem deathVFX = Instantiate(deathParticleSystem, transform.position, Quaternion.identity); 
+        Destroy(deathVFX.gameObject, 2f);
         Destroy(gameObject);
     }
 }
