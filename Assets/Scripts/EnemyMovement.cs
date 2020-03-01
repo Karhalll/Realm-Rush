@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
+    [SerializeField] float moveSpeed = 1f;
+
     private void Start()
     {
         Pathfinder pathfinder = FindObjectOfType<Pathfinder>();
@@ -16,7 +18,7 @@ public class EnemyMovement : MonoBehaviour
         foreach (Waypoint waypoint in path)
         {
             transform.position = waypoint.transform.position;
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(moveSpeed);
         }
     }
 }

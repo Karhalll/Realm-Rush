@@ -9,11 +9,6 @@ public class EnemyDamage : MonoBehaviour
     [SerializeField] ParticleSystem hitParticleSystem = null;
     [SerializeField] ParticleSystem deathParticleSystem = null;
     
-    void Start()
-    {
-        
-    }
-
     private void OnParticleCollision(GameObject other) 
     {
         ProcessHit();
@@ -32,7 +27,8 @@ public class EnemyDamage : MonoBehaviour
     private void KillEnemy()
     {
         ParticleSystem deathVFX = Instantiate(deathParticleSystem, transform.position, Quaternion.identity); 
-        Destroy(deathVFX.gameObject, 2f);
+        float deathDelay = deathVFX.main.duration;
+        Destroy(deathVFX.gameObject, deathDelay);
         Destroy(gameObject);
     }
 }
