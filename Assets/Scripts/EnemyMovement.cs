@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 1f;
+    [SerializeField] ParticleSystem reachGoalVFXPrefab = null;
 
     private void Start()
     {
@@ -20,5 +21,15 @@ public class EnemyMovement : MonoBehaviour
             transform.position = waypoint.transform.position;
             yield return new WaitForSeconds(moveSpeed);
         }
+
+        HandleRechedGoal();
+    }
+
+    private void HandleRechedGoal()
+    {
+        ParticleSystem reachGoalVFX = Instantiate(reachGoalVFXPrefab, transform.position, Quaternion.identity); 
+        float destroyDelay = reachGoalVFX.main.duration;
+        Destroy(reachGoalVFX.gameObject,destroyDelay);
+        Destroy(gameObject);
     }
 }
